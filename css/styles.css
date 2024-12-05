@@ -1,0 +1,256 @@
+/* Allmänna stilar */
+body {
+  margin: 0;
+  font-family: "Courier New", Courier, monospace;
+  background-color: #0d0d0d;
+  color: #d1e751;
+}
+
+h1 {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 3rem;
+  color: #f5f5f5;
+  text-shadow: 2px 2px 5px #00ff00;
+}
+
+.calendar {
+  margin: auto;
+  padding: 20px;
+  width: fit-content;
+}
+
+.calendar-day {
+  display: block;
+}
+
+a.calendar-day {
+  text-decoration: none;
+}
+
+/* .day.locked {
+  background-color: #242424;
+  color: #555;
+  border-color: #555;
+  cursor: not-allowed;
+}
+
+.day:hover:not(.locked) {
+  background-color: #0f3d0f;
+  transform: scale(1.1);
+} */
+
+.popup {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #242424;
+  border: 3px solid #d1e751;
+  padding: 20px;
+  width: 90%;
+  max-width: 400px;
+  border-radius: 10px;
+  box-shadow: 0 0 15px #00ff00;
+  text-align: left;
+  color: #d1e751;
+}
+
+.popup h2 {
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+  text-shadow: 2px 2px 5px #00ff00;
+}
+
+.popup p {
+  font-size: 1rem;
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+
+#answer {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 2px solid #d1e751;
+  background-color: #0d0d0d;
+  color: #d1e751;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 1rem;
+  border-radius: 5px;
+}
+
+#submit {
+  padding: 10px 20px;
+  background-color: #d1e751;
+  color: #0d0d0d;
+  font-weight: bold;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#submit:hover {
+  background-color: #a5c914;
+}
+
+/* Poängräknare */
+#score {
+  margin-top: 10px;
+  font-size: 1.5rem;
+  color: #f5f5f5;
+  text-shadow: 2px 2px 5px #00ff00;
+}
+
+/* Stjärna (animation vid klarad kluring) */
+/* Container för fallande stjärnor */
+#star-animation-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 1000;
+}
+
+/* Individuell stjärna */
+.star-falling {
+  position: absolute;
+  top: -50px;
+  width: 5px;
+  height: 5px;
+  background: radial-gradient(circle, #dcdcdc, #dbdbdb);
+  border-radius: 50%;
+  opacity: 0.8;
+  animation: fall 2.5s linear infinite;
+}
+
+/* Keyframes för stjärnfall */
+@keyframes fall {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(120vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* Dag-styling när kluringen är löst */
+.day.solved {
+  background-color: #0f3d0f;
+  color: #ffffff;
+  border-color: #a5c914;
+  position: relative;
+  cursor: default;
+}
+
+.day.solved::after {
+  content: "★";
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  font-size: 1.5rem;
+  color: #ffd700;
+  text-shadow: 1px 1px 3px #ffffff;
+}
+
+
+
+
+
+
+/* .calendar2 {
+  font-family: monospace;
+  white-space: pre;
+}
+
+.calendar2 a,
+.calendar2 span {
+  display: block;
+  text-decoration: none;
+  color: gray;
+}
+
+.calendar2 a.calendar-verycomplete {
+  color: green;
+}
+
+.calendar2 a.calendar-complete {
+  color: blue;
+}
+
+.calendar-color-w {
+  color: white;
+}
+
+.calendar-color-3s {
+  color: silver;
+}
+
+.calendar-color-3g {
+  color: gray;
+}
+
+.calendar-color-3y {
+  color: yellow;
+}
+
+.calendar-color-3b {
+  color: blue;
+}
+
+.calendar-color-6y {
+  color: yellow;
+}
+
+.calendar-color-6b {
+  color: blue;
+}
+
+.calendar-color-6o {
+  color: orange;
+}
+
+.calendar-color-6r {
+  color: red;
+}
+
+.calendar-color-6u {
+  color: purple;
+}
+
+.calendar-color-8n {
+  color: navy;
+}
+
+.calendar-color-8i {
+  color: indigo;
+}
+
+.calendar-color-8e {
+  color: emerald;
+}
+
+.calendar-color-8w {
+  color: white;
+}
+
+.calendar-day {
+  font-weight: bold;
+}
+
+.calendar-mark-complete {
+  color: gold;
+}
+
+.calendar-mark-verycomplete {
+  color: red;
+} */
