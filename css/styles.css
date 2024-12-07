@@ -14,31 +14,70 @@ h1 {
   text-shadow: 2px 2px 5px #00ff00;
 }
 
+/* Kalender */
 .calendar {
   margin: auto;
   padding: 20px;
   width: fit-content;
+  font-size: 1.125rem;
 }
 
 .calendar-day {
   display: block;
 }
 
-a.calendar-day {
-  text-decoration: none;
+.tomorrow {
+  color: #383838;
 }
 
-/* .day.locked {
-  background-color: #242424;
-  color: #555;
-  border-color: #555;
-  cursor: not-allowed;
+.future {
+  color: #383838;
+  text-align: right;
 }
 
-.day:hover:not(.locked) {
-  background-color: #0f3d0f;
-  transform: scale(1.1);
-} */
+.color-t {
+  color: #d1e75100;
+}
+
+.solved .color-v {
+  color: white;
+}
+
+.solved .color-w {
+  color: white;
+  text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff;
+}
+
+.solved .color-r {
+  color: red;
+}
+
+.solved .color-g {
+  color: green;
+  text-shadow: 0 0 5px green, 0 0 10px green, 0 0 15px green;
+}
+
+.solved .color-y {
+  color: yellow;
+  text-shadow: 0 0 5px yellow, 0 0 10px yellow, 0 0 15px yellow;
+}
+
+.solved .color-b {
+  color: beige;
+}
+
+.solved .color-s {
+  color: rgb(51, 51, 255);
+}
+
+.calendar-day.open {
+  cursor: pointer;
+  color: #8f8f8f;
+}
+
+.calendar-day.open:hover {
+  background-color: #191919;
+}
 
 .popup {
   display: none;
@@ -161,96 +200,3 @@ a.calendar-day {
   color: #ffd700;
   text-shadow: 1px 1px 3px #ffffff;
 }
-
-
-
-
-
-
-/* .calendar2 {
-  font-family: monospace;
-  white-space: pre;
-}
-
-.calendar2 a,
-.calendar2 span {
-  display: block;
-  text-decoration: none;
-  color: gray;
-}
-
-.calendar2 a.calendar-verycomplete {
-  color: green;
-}
-
-.calendar2 a.calendar-complete {
-  color: blue;
-}
-
-.calendar-color-w {
-  color: white;
-}
-
-.calendar-color-3s {
-  color: silver;
-}
-
-.calendar-color-3g {
-  color: gray;
-}
-
-.calendar-color-3y {
-  color: yellow;
-}
-
-.calendar-color-3b {
-  color: blue;
-}
-
-.calendar-color-6y {
-  color: yellow;
-}
-
-.calendar-color-6b {
-  color: blue;
-}
-
-.calendar-color-6o {
-  color: orange;
-}
-
-.calendar-color-6r {
-  color: red;
-}
-
-.calendar-color-6u {
-  color: purple;
-}
-
-.calendar-color-8n {
-  color: navy;
-}
-
-.calendar-color-8i {
-  color: indigo;
-}
-
-.calendar-color-8e {
-  color: emerald;
-}
-
-.calendar-color-8w {
-  color: white;
-}
-
-.calendar-day {
-  font-weight: bold;
-}
-
-.calendar-mark-complete {
-  color: gold;
-}
-
-.calendar-mark-verycomplete {
-  color: red;
-} */

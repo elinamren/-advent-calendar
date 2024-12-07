@@ -1,30 +1,38 @@
 // script.js
 const asciiArt = `
-.                                 _                                 1
-                               .-(_)                                2
-                              / _/                                  3
-                           .-'   \\                                  4
-                          /       '.                                5
-                        ,-~--~-~-~-~-,                              6
-                       {__.._...__..._}             ,888,           7
-       ,888,          /\\##"  6  6  "##/\\          ,88' \`88,         8
-     ,88' '88,__     |(\\\`    (__)    \`/)|     __,88'     \`88        9
-    ,88'   .8(_ \\_____\\_    '----'    _/_____/ _)8.       8'       10
-    88    (___) \\ \\     '-.__    __.-'      / /(___)               11
-    88    (___)88 |          '--'          | 88(___)               12
-    8'      (__)88,___/                \\___,88(__)                 13
-              __\`88,_/__________________\\_,88\`__                   14
-             /    \`88,       |88|       ,88'    \\                  15
-            /        \`88,    |88|   , 88'        \\                 16
-           /____________\`88,_\\88/_,88\`____________\\                17
-          /88888888888888888;8888;88888888888888888\\               18
-         /^^^^^^^^^^^^^^^^^^\`/88\\\\^^^^^^^^^^^^^^^^^^\\              19
-        /                    |88| \\==========,       \\             20
-       /_  __  __  __   _ __ |88|_|^   GOD    | _  ___\\            21
-       |;:.                  |88| |    JUL!   |       |            22
-       |;;:.                 |88| '==========='       |            23
-       |;;:.                 |88|                     |            24
+t.                                 w_                                 v1
+t                               r.-w(_)                                v2
+t                              r/ _/                                  v3
+t                           r.-'   \\                                  v4
+t                          r/       '.                                v5
+t                        w,-~--~-~-~-~-,                              v6
+t                       w{__.._...__..._}             y,888,           v7
+t       y,888,          v/\\##"  s6  6  v"##/\\          y,88' \`88,         v8
+t     y,88' '88,b__     v|(\\\`    b(__)    v\`/)|     b__y,88'     \`88        v9
+t    y,88'   .8b(_ \\r_____v\\_    r'----'    v_/r_____b/ _)y8.       8'       v10
+t    y88    b(___) \\ \\     '-.__    __.-'      / /(___)               v11
+t    y88    b(___)y88 b|          '--'          | y88b(___)               v12
+t    y8'      b(__)y88,r___/                \\___y,88b(__)                 v13
+t              g__y\`88,g_r/g__________________r\\g_y,88\`g__                   v14
+t             g/    y\`88,       |88|       ,88'    g\\                  v15
+t            g/        y\`88,    |88|   , 88'        g\\                 v16
+t           g/y____________\`88,_\\88/_,88\`____________g\\                v17
+t          y/88888888888888888;8888;88888888888888888\\               v18
+t         g/t^^^^^^^^^^^^^^^^^^\`/88\\\\^^^^^^^^^^^^^^^^^^g\\              v19
+t        g/                    y|88| \\w==========,       g\\             v20
+t       g/_  __  __  __   _ __ t|88|g_w|y^   rGOD    w| g_  ___\\            v21
+t       g|;:.                  y|88| w|    rJUL!   w|       g|            v22
+t       g|;;:.                 y|88| w'==========='       g|            v23
+t       g|;;:.                 y|88|                     g|            v24
 `;
+
+// w = white with glow
+// v = white
+// r = red
+// g = green
+// y = yellow
+// b = beige
+
 
 const calendarContainer = document.querySelector(".calendar");
 const totalDays = 24; // Antalet dagar i kalendern
@@ -40,22 +48,43 @@ console.log(currentDay);
 // Split the ASCII art into lines
 const asciiLines = asciiArt.trim().split('\n');
 
-console.log(asciiLines);
-
+// Function to wrap characters in spans with color classes
+function wrapWithColor(line) {
+  return line.replace(/([a-z])([^a-z]*)/g, (match, p1, p2) => {
+    return `<span class="color-${p1}">${p2.replace(/ /g, '&nbsp;')}</span>`;
+  });
+}
 
 // Generera kalendern
 asciiLines.forEach((line, index) => {
   const day = index + 1;
-  const dayElement = document.createElement(currentMonth === 12 && day <= currentDay ? "a" : "div");
+  let dayElement;
 
   if (currentMonth === 12 && day <= currentDay) {
-    dayElement.href = `/2024/day/${day}`;
-    dayElement.classList.add("calendar-day", `calendar-day${day}`, "calendar-verycomplete");
+    // Current and previous dates in December
+    dayElement = document.createElement("div");
+    dayElement.addEventListener("click", () => openPopup(day));
+    dayElement.classList.add("calendar-day", `calendar-day${day}`, "open");
+    dayElement.innerHTML = wrapWithColor(line); // Preserve spaces and add colors
+  } else if (currentMonth === 12 && day === currentDay + 1) {
+    // Tomorrow's date
+    dayElement = document.createElement("div");
+    dayElement.classList.add("calendar-day", `calendar-day${day}`, "tomorrow");
+    dayElement.innerHTML = line.replace(/[a-z]/g, '').replace(/ /g, '&nbsp;'); // Preserve spaces
+  } else if (currentMonth === 12 && day > currentDay + 1) {
+    // Future dates
+    dayElement = document.createElement("div");
+    const dayNumber = line.match(/\d+$/)[0];
+    const spaces = ' '.repeat(line.length - dayNumber.length);
+    dayElement.innerHTML = spaces + dayNumber;
+    dayElement.classList.add("calendar-day", `calendar-day${day}`, "locked", "future");
   } else {
+    // Past dates
+    dayElement = document.createElement("div");
     dayElement.classList.add("calendar-day", `calendar-day${day}`, "locked");
+    dayElement.innerHTML = line.replace(/ /g, '&nbsp;'); // Preserve spaces
   }
 
-  dayElement.innerHTML = line.replace(/ /g, '&nbsp;'); // Preserve spaces
   calendarContainer.appendChild(dayElement);
 });
 
@@ -129,7 +158,6 @@ function createFallingStars() {
 function validateAnswer(correctAnswer, day) {
   const answerField = document.getElementById("answer");
   const answer = answerField.value.trim();
-  const nextDay = day + 1;
 
   if (answer.toLowerCase() === correctAnswer.toString().toLowerCase()) {
     // Uppdatera poäng
@@ -139,14 +167,8 @@ function validateAnswer(correctAnswer, day) {
     // Animation: Visa stjärnfall
     createFallingStars();
 
-    // Lås upp nästa dag
-    const nextDayElement = document.querySelector(`.day[data-day="${nextDay}"]`);
-    if (nextDayElement) {
-      nextDayElement.classList.remove("locked");
-    }
-
     // Markera dagen som löst
-    const currentDayElement = document.querySelector(`.day[data-day="${day}"]`);
+    const currentDayElement = document.querySelector(`.calendar-day${day}`);
     if (currentDayElement) {
       currentDayElement.classList.add("solved");
     }
