@@ -203,10 +203,7 @@ function updateScore() {
   scoreElement.innerText = score;
 }
 
-// Stäng popup när man klickar utanför
-window.addEventListener("click", (event) => {
-  const popup = document.getElementById("popup");
-  if (event.target === popup) {
-    popup.style.display = "none";
-  }
+// Stäng popup när man klickar på x
+document.getElementById("close-popup").addEventListener("click", () => {
+  document.getElementById("popup").style.display = "none";
 });

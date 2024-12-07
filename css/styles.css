@@ -109,10 +109,18 @@ h1 {
   color: #00ff00;
 }
 
+#close-popup {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 1.125rem;
+  cursor: pointer;
+}
+
 .popup h2 {
   font-size: 1.125rem;
   font-weight: normal;
-  margin-bottom: 15px;
+  margin: 0 0 15px;
 }
 
 .popup p {
