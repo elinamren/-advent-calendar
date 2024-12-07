@@ -3,14 +3,15 @@ body {
   margin: 0;
   font-family: "Courier New", Courier, monospace;
   background-color: #0d0d0d;
-  color: #d1e751;
+  color: #00ff00;
 }
 
 h1 {
   text-align: center;
   margin-top: 20px;
-  font-size: 3rem;
-  color: #f5f5f5;
+  font-size: 1.125rem;
+  color: #00ff00;
+  font-weight: normal;
   text-shadow: 2px 2px 5px #00ff00;
 }
 
@@ -24,6 +25,15 @@ h1 {
 
 .calendar-day {
   display: block;
+}
+
+.calendar-day.open {
+  cursor: pointer;
+  color: #8f8f8f;
+}
+
+.calendar-day.open:hover {
+  background-color: #191919;
 }
 
 .tomorrow {
@@ -70,13 +80,17 @@ h1 {
   color: rgb(51, 51, 255);
 }
 
-.calendar-day.open {
-  cursor: pointer;
-  color: #8f8f8f;
+.solved {
+  position: relative;
 }
 
-.calendar-day.open:hover {
-  background-color: #191919;
+.solved::after {
+  content: "★";
+  position: absolute;
+  top: -4px;
+  right: -20px;
+  font-size: 1.125rem;
+  color: #fcff33;
 }
 
 .popup {
@@ -86,62 +100,69 @@ h1 {
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: #242424;
-  border: 3px solid #d1e751;
+  border: 1px solid #fff;
   padding: 20px;
-  width: 90%;
-  max-width: 400px;
-  border-radius: 10px;
-  box-shadow: 0 0 15px #00ff00;
+  width: 70vw;
+  max-width: 600px;
+  box-shadow: 0 0 4px #fff;
   text-align: left;
-  color: #d1e751;
+  color: #00ff00;
 }
 
 .popup h2 {
-  font-size: 1.5rem;
+  font-size: 1.125rem;
+  font-weight: normal;
   margin-bottom: 15px;
-  text-shadow: 2px 2px 5px #00ff00;
 }
 
 .popup p {
-  font-size: 1rem;
+  font-size: 1.125rem;
   line-height: 1.5;
   margin-bottom: 20px;
 }
 
 #answer {
-  width: 100%;
+  width: calc(100% - 24px);
   padding: 10px;
   margin-bottom: 15px;
-  border: 2px solid #d1e751;
+  border: 2px solid #fff;
   background-color: #0d0d0d;
-  color: #d1e751;
+  color: #fff;
   font-family: "Courier New", Courier, monospace;
   font-size: 1rem;
-  border-radius: 5px;
 }
 
 #submit {
-  padding: 10px 20px;
-  background-color: #d1e751;
-  color: #0d0d0d;
-  font-weight: bold;
-  font-size: 1rem;
+  font-family: "Courier New", Courier, monospace;
+  padding: 0;
+  background-color: transparent;
+  color: #00ff00;
+  font-weight: normal;
+  font-size: 1.125rem;
   border: none;
-  border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
 }
 
 #submit:hover {
-  background-color: #a5c914;
+  text-shadow: 2px 2px 5px #00ff00;
 }
 
 /* Poängräknare */
 #score {
   margin-top: 10px;
-  font-size: 1.5rem;
-  color: #f5f5f5;
-  text-shadow: 2px 2px 5px #00ff00;
+  font-size: 1.125rem;
+  color: #fcff33;
+  text-shadow: 2px 2px 5px #fcff33;
+  position: relative;
+}
+
+#score::after {
+  content: "★";
+  position: absolute;
+  top: -3px;
+  right: -16px;
+  font-size: 1.125rem;
+  color: #fcff33;
 }
 
 /* Stjärna (animation vid klarad kluring) */
@@ -180,23 +201,4 @@ h1 {
     transform: translateY(120vh) rotate(360deg);
     opacity: 0;
   }
-}
-
-/* Dag-styling när kluringen är löst */
-.day.solved {
-  background-color: #0f3d0f;
-  color: #ffffff;
-  border-color: #a5c914;
-  position: relative;
-  cursor: default;
-}
-
-.day.solved::after {
-  content: "★";
-  position: absolute;
-  top: 5px;
-  right: 10px;
-  font-size: 1.5rem;
-  color: #ffd700;
-  text-shadow: 1px 1px 3px #ffffff;
 }

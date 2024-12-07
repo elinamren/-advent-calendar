@@ -42,8 +42,12 @@ const today = new Date();
 const currentDay = today.getDate();
 const currentMonth = today.getMonth() + 1; // Månader är 0-indexerade
 
-console.log(currentDay);
+// Retrieve saved data from local storage
+let solvedDays = JSON.parse(localStorage.getItem('solvedDays')) || [];
+let score = parseInt(localStorage.getItem('score')) || 0;
 
+// Update score display
+document.getElementById('score').textContent = score;
 
 // Split the ASCII art into lines
 const asciiLines = asciiArt.trim().split('\n');
@@ -53,6 +57,14 @@ function wrapWithColor(line) {
   return line.replace(/([a-z])([^a-z]*)/g, (match, p1, p2) => {
     return `<span class="color-${p1}">${p2.replace(/ /g, '&nbsp;')}</span>`;
   });
+}
+
+// Function to mark a day as solved
+function markDayAsSolved(day) {
+  if (!solvedDays.includes(day)) {
+    solvedDays.push(day);
+    localStorage.setItem('solvedDays', JSON.stringify(solvedDays));
+  }
 }
 
 // Generera kalendern
@@ -66,6 +78,9 @@ asciiLines.forEach((line, index) => {
     dayElement.addEventListener("click", () => openPopup(day));
     dayElement.classList.add("calendar-day", `calendar-day${day}`, "open");
     dayElement.innerHTML = wrapWithColor(line); // Preserve spaces and add colors
+    if (solvedDays.includes(day)) {
+      dayElement.classList.add("solved");
+    }
   } else if (currentMonth === 12 && day === currentDay + 1) {
     // Tomorrow's date
     dayElement = document.createElement("div");
@@ -87,9 +102,6 @@ asciiLines.forEach((line, index) => {
 
   calendarContainer.appendChild(dayElement);
 });
-
-// Globala variabler
-let score = 0; // Poängräknare
 
 // Dynamiskt rendera dagar och låsa dem beroende på datum
 document.querySelectorAll(".day").forEach(day => {
@@ -163,6 +175,7 @@ function validateAnswer(correctAnswer, day) {
     // Uppdatera poäng
     score++;
     updateScore();
+    localStorage.setItem('score', score);
 
     // Animation: Visa stjärnfall
     createFallingStars();
@@ -171,6 +184,7 @@ function validateAnswer(correctAnswer, day) {
     const currentDayElement = document.querySelector(`.calendar-day${day}`);
     if (currentDayElement) {
       currentDayElement.classList.add("solved");
+      markDayAsSolved(day)
     }
 
     // Stäng popup
@@ -186,7 +200,7 @@ function validateAnswer(correctAnswer, day) {
 // Funktion för att uppdatera poäng
 function updateScore() {
   const scoreElement = document.getElementById("score");
-  scoreElement.innerText = `Poäng: ${score}`;
+  scoreElement.innerText = score;
 }
 
 // Stäng popup när man klickar utanför
