@@ -119,7 +119,7 @@ function openPopup(day) {
   const popup = document.getElementById("popup");
   const popupTitle = document.getElementById("popup-title");
   const popupDescription = document.getElementById("popup-description");
-  const answerField = document.getElementById("answer");
+  const popupStory = document.getElementById("popup-story");
   const submitButton = document.getElementById("submit");
 
   // Hämta kluring från puzzles.js
@@ -132,6 +132,7 @@ function openPopup(day) {
   // Visa popup med korrekt innehåll
   popup.style.display = "block";
   popupTitle.innerText = puzzle.title;
+  popupStory.innerHTML = puzzle.story;
   popupDescription.innerHTML = puzzle.description;
 
   // Reset event listeners för submit-knappen
